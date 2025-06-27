@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 export async function fetchYoutubeVideoId(query: string): Promise<string> {
   const apiKey = process.env.NEXT_PUBLIC_YOUTUBE_API_KEY;
   if (!apiKey) {
