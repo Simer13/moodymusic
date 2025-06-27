@@ -89,7 +89,7 @@ export default function MoodsPage({ name }: { name: string }) {
         
         <h2 className="text-2xl font-semibold mb-4">✨ Moods</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mb-12">
-          {moods.map((mood) => (
+          {moods.map((mood: string) => (
             <Card
               key={mood}
               label={mood}

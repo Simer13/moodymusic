@@ -1,4 +1,12 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+interface YouTubeSearchItem {
+  id: {
+    videoId: string;
+  };
+  snippet: {
+    liveBroadcastContent?: string;
+  };
+}
+
 export async function fetchYoutubeVideoId(query: string): Promise<string> {
   const apiKey = process.env.NEXT_PUBLIC_YOUTUBE_API_KEY;
   if (!apiKey) {
@@ -14,11 +22,10 @@ export async function fetchYoutubeVideoId(query: string): Promise<string> {
     const data = await res.json();
 
     const video = Array.isArray(data?.items)
-      ? data.items.find((item: any) => !item.snippet?.liveBroadcastContent)
+      ? (data.items as YouTubeSearchItem[]).find((item) => !item.snippet?.liveBroadcastContent)
       : null;
 
-    return data.items?.find((item) => item.id.videoId)?.id?.videoId || "";
-
+    return video?.id?.videoId || "dQw4w9WgXcQ";
   } catch (err) {
     console.error("Failed to fetch YouTube video:", err);
     return "dQw4w9WgXcQ";
